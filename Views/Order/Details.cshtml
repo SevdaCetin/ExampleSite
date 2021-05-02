@@ -1,0 +1,99 @@
+﻿@using ExampleSite.Models
+@model OrderDetails
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content">
+    <div>
+        <h4>Sipariş Bilgileri</h4>
+        <hr />
+        <div class="row">
+            @if (TempData["mesaj"] != null)
+            {
+                <div class="alert alert-success alert-dismissable" style="padding:5px 5px 5px 5px">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>	<i class="icon fa fa-check"></i> Basarılı!</h4>
+                    Bilgileriniz kaydedildi.
+                </div>
+            }
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                Sipariş Durumu
+            </dt>
+
+            <dd>
+               @using (Html.BeginForm("UpdateOrderState", "Order", FormMethod.Post))
+            {
+                @Html.HiddenFor(i=>i.OrderId)
+                   @Html.EnumDropDownListFor(i=>i.OrderState,"Sipariş Durmunu Seçiniz", new {@class="form-control"})
+            
+                   <button type="submit" class="btn btn-success" >Güncelle</button>
+            }
+            </dd>
+
+            <dt>
+                Kullanıcı Adı
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+            <dt>
+                Sipariş Numarası
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OrderNumber)
+            </dd>
+            <dt>
+                Toplam Tutar
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Total)
+            </dd>
+            <dt>
+                Adres
+            </dt>
+
+            <dd>
+                Adres: @Html.DisplayFor(model => model.Adres)
+                Mahalle: @Html.DisplayFor(model => model.Sehir)
+                İlçe: @Html.DisplayFor(model => model.Semt)
+                Şehir: @Html.DisplayFor(model => model.Mahalle)
+                Posta Kodu: @Html.DisplayFor(model => model.Postakodu)
+            </dd>
+        </dl>
+    </div>
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Resim </th>
+                <th>Ürün Adı</th>
+                <th>Toplam Tutar </th>
+                <th>Adet</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var item in Model.OrderLines)
+                {
+                    <td><img src="~/Content/image/@item.image" width="75" height="75" /></td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td><a href="/Home/ProductDetails/@item.ProductId" class="btn btn-success" target="_blank">Ürün Detay </a></td>
+
+                }
+
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+

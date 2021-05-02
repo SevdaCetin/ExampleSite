@@ -1,0 +1,5 @@
+﻿@model ExampleSite.Models.Cart
+<a href="/Cart/Index/">
+    <span class="icon-shopping-cart"></span>[@Model.Cartlines.Count] Adet 
+    <span class="badge badge-warning">@Model.Total().ToString("c") </span>
+</a>

@@ -1,0 +1,110 @@
+﻿@model ExampleSite.Entity.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<section class="content">
+    <h2 style="padding: 8px 8px 8px 8px">
+        Ürün Sil
+    </h2>
+    <h4 style="padding: 8px 8px 8px 8px;">  Silmek istediğinizden emin misiniz?</h4>
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Kategori Adı:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.Name)
+            </dd>
+
+            <dt>
+                Ürün Adı:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                Açıklama:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                Resim:
+            </dt>
+
+            <dd>
+                <img src="~/Content/image/@Model.image" width="60" height="60" />  
+                @Html.DisplayFor(model => model.image)
+
+            </dd>
+
+            <dt>
+                Fiyat:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                Stok:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Stock)
+            </dd>
+
+            <dt>
+                SLayt:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Slider)
+            </dd>
+
+            <dt>
+                Anasayfa:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsHome)
+            </dd>
+
+            <dt>
+                Popüler:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsFeatured)
+            </dd>
+
+            <dt>
+                Onay:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsApproved)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                @Html.ActionLink("Kategori Listesi", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+</section>
